@@ -9,6 +9,7 @@ export default function App() {
   const [ secondNumber, setsecondNumber ] = useState<number>(0);
   const [ operator, setoperator ] = useState<string>("");
   const [ result, setresult ] = useState(0);
+  const [ click, setclick ] = useState(false);
   const calac: Icalcolater = {
     firstNumber: firstNumber,
     secondNumber: secondNumber,
@@ -29,7 +30,8 @@ export default function App() {
     console.log("handleNumberClick", num);
     if (!operator) {
       setfirstNumber((prev:number) => prev * 10 + num); // Update firstNumber
-    } else {
+    }
+     else {
       setsecondNumber((prev:number) => prev * 10 + num); // Update secondNumber
     }
   };
@@ -46,6 +48,7 @@ export default function App() {
   };
   const deleteOpration = () => {
     console.log("handleDelete");
+    setclick(false);
     setfirstNumber(0);
     setsecondNumber(0);
     setoperator("");
@@ -55,7 +58,7 @@ export default function App() {
     <div className="calcolater">
       <h2>Calcolater</h2>
       <div className="result">
-        <Resultopration firstNumber={firstNumber} secondNumber={secondNumber} operator={operator} result={result}  />
+        <Resultopration firstNumber={firstNumber} secondNumber={secondNumber} operator={operator} result={result}  click ={click}  />
         <button onClick={deleteOpration}>
           x
         </button>
@@ -83,6 +86,7 @@ export default function App() {
         </div>
         <button className="equal" onClick={()=>{
              handleCalculate()
+             setclick(true)
             }}>
             =
         </button>
