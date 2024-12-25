@@ -1,0 +1,28 @@
+.to-do-item{
+    display: flex;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    background-color: #c58e8e;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+    font-size: 25px;
+    color: white;
+}
+
+.to-do-item:hover {
+    background-color: #d3c2c2;
+}
+.state{
+    font-size: 23px;
+    color: #fff;
+}
+.Done{
+    color: green;
+}
+.NotDone{
+    color: #953838;
+}

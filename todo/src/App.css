@@ -1,0 +1,41 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.title{
+  font-size: 45px;
+  color: rgb(196, 101, 120);
+  font-weight: 900;
+}
+.error{
+  color: red;
+  font-size: 20px;
+  margin-top: 10px;
+}
+.input{
+  display: block;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  background-color: #c39898;
+}
+.input:focus{
+  background-color: #b78181;
+}
+.button{
+  background-color: #c66666;
+}
