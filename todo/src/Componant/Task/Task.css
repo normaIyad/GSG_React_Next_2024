@@ -11,8 +11,17 @@
     font-family: Arial, sans-serif;
     font-size: 25px;
     color: white;
+    margin-top: 10px;
 }
-
+.urgent{
+    background-color: #bb4f4f !important;
+    color: #fff;
+}
+.icon{
+    font-size: 10px;
+    color: #fff;
+    cursor: pointer;
+}
 .to-do-item:hover {
     background-color: #d3c2c2;
 }
@@ -22,7 +31,9 @@
 }
 .Done{
     color: green;
+    margin: 5px 10px;
 }
 .NotDone{
     color: #953838;
+    margin: 5px 10px;
 }

@@ -38,4 +38,11 @@
 }
 .button{
   background-color: #c66666;
+  width: 50%;
+  margin-top: 10px;
+}
+.urgent-form{
+  color: #fff;
+  font-size: 28px;
+  padding: 10px;
 }

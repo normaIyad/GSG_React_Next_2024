@@ -2,56 +2,46 @@ import { useState } from 'react';
 import './App.css';
 import Itask from "./types";
 import Task from "./Componant/Task/Task";
+import DayDate from "./Componant/Day&Date/DayDate";
+import Form from "./Componant/Form/Form";
+import Count from "./Componant/Count/Count";
 // Define the type for a task
 
 function App() {
   const [tasks, setTasks] = useState<Itask[]>([]); // Correct type for tasks
-  const [task, setTask] = useState("");
-  const [errorsList, setErrorsList] = useState<string[]>([]);
-  const handleChange = (task: string) => {
-    setTask(task);
-  };
-
-  const handleSubmit = () => {
-    if (task.length > 5) {
-      setTasks([...tasks, { taskName: task, isDone: false }]); // Correct taskName
-      setTask(''); 
-    }else{
-      setErrorsList(["Task name should be more than 5 characters"])
-    }
-  };
-  console.log(task);
+  const handelItem = (item:Itask)=>{
+        setTasks([...tasks, item]); // Correct taskName
+  }
+  const handleDelete = (taskId: number) => {
+    console.log("Delete task app" + taskId);
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(newTasks);
+  }
+  const isDonChange = (taskId:number)=>{
+    console.log("isDone changed" + taskId);
+    const newTasks = tasks.map((task) => task.id === taskId? {...task, isDone:!task.isDone} : task);
+    setTasks(newTasks);
+    console.log("isDone changed" + taskId + " new state " + newTasks[0].isDone);
+  }
   return (
     <>
-      <div className='form'>
-        <label htmlFor="task" className='title'>
-          Add a new task
-        </label>
-        <span className='error'>
-        {errorsList.length ? errorsList.map((error: string) => (
-          <p key={error}>{error}</p>
-        )) : null}
-        </span>
-        <input
-          className='input'
-          type="text"
-          id="task"
-          value={task}
-          onChange={(e) => handleChange(e.target.value)}
-        />
-      </div>
-      <div>
-        <button onClick={handleSubmit} className='button'>Add task</button>
-      </div>
-
+        <DayDate />
+        <Form handelItem = {handelItem} />
+        <Count tasks={tasks}/>
       <div>
         <h2>To-Do List</h2>
         <ul>
-          {tasks.map((task:Itask) => (
-            <Task task={task}  />
+          {tasks.map((task: Itask) => (
+            <Task 
+            key={task.id}
+            task={task} 
+            handleDelete={handleDelete}
+            isDonChange ={isDonChange}
+            />
           ))}
         </ul>
       </div>
+
     </>
   );
 }

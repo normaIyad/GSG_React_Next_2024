@@ -1,29 +1,42 @@
-import { useState } from "react";
 import Itask from "../../types";
-import "./Task.css"
-interface ITask extends ITask {
-    isDone: boolean;
-    taskName: string;
+import { Trash } from "@phosphor-icons/react";
+import "./Task.css";
+
+interface TaskProps {
+  task: Itask; // The task object
+  handleDelete: (id: number) => void; // Function to delete the task
+  isDonChange: (taskId: number) => void; // Function to toggle the task's done state
 }
-const Task = ({ task }) => {
-    const [isDone, setIsdone] = useState(false)
-    const isDonChange = () => {
-        console.log("isDone changed" + task.isDone);
-        task.isDone =!task.isDone; // Mock function to simulate changing task.isDone state.  You would replace this with actual logic.
-        setIsdone(!task.isDone); // Mock function to simulate changing task.isDone state.  You would replace this with actual logic.
-         console.log("isDone changed" + isDone);
-     }
-    console.log(task.taskName);
-    return (
-        <div className="to-do-item">
-            <input type="checkbox" id='donTask' className="state" onChange={isDonChange}  />
-            <label htmlFor="donTask"  >
-                {task.taskName
-                } <span className={task.isDone  ? "Done" : "NotDone"}>
-                    {task.isDone  ? "Done" : "Not Done"}
-                </span>
-            </label>
-        </div>
-    )
-}
+
+const Task = ({ task, handleDelete, isDonChange }: TaskProps) => {
+  const handleCheckboxChange = () => {
+    isDonChange(task.id); // Call the prop function to toggle the task's done state
+  };
+
+  const handleTaskDelete = () => {
+    handleDelete(task.id); // Call the prop function to delete the task
+  };
+
+  return (
+    <div className={`to-do-item ${task.isUrgent ? "urgent" : ""}`}>
+      <input
+        type="checkbox"
+        id={task.id.toString()}
+        className="state"
+        checked={task.isDone}
+        onChange={handleCheckboxChange}
+      />
+      <label htmlFor={task.id.toString()}>
+        {task.taskName}{" "}
+        <span className={task.isDone ? "Done" : "NotDone"}>
+          {task.isDone ? "Done" : "Not Done"}
+        </span>
+      </label>
+      <div onClick={handleTaskDelete} className="delete-button">
+        <Trash className="icon" size={32} />
+      </div>
+    </div>
+  );
+};
+
 export default Task;
