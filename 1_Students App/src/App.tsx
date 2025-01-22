@@ -49,6 +49,7 @@ function App() {
           <Link to='/add' className={location.pathname === '/add' ? 'active' : ''}>Add Student</Link>
           <Link to='/about' className={location.pathname === '/about' ? 'active' : ''}>About App</Link>
           <Link to="/login" className={location.pathname === '/login' ? 'active':""} >log in</Link>
+          
         </nav>
         <Routes>
           <Route path='/'

@@ -22,9 +22,9 @@ function App() {
   }, [storedData]);
 
   const removeFirst = () => {
-    const newList = [...studentsList];
-    newList.shift();  // removes the first item
-    setStudentsList(newList);
+   dispatch({
+     type: 'REMIVE_FIRST'
+   })
   }
 
   const handleAbsentChange = (id: string, change: number) => {
@@ -37,7 +37,7 @@ function App() {
     dispatch({ type: 'ResetAbsents', payload: {id , change} });
   }
   const handleAddStudent = (newStudent: IStudent) => {
-    setStudentsList([newStudent, ...studentsList]);
+    dispatch({ type: 'ADD_STUDENT', payload: newStudent})
   }
 
   const h1Style = { color: '#69247C', fontSize: '24px' };

@@ -1,3 +1,4 @@
+import Student from "../components/student/student.component";
 import { IStudent } from "../types";
 
 interface Istate {
@@ -10,8 +11,9 @@ interface Istate {
 type Action =
   | { type: "IncrementAbsents"; payload:  { id: string; change: number }  }
   | { type: "DecrementAbsents"; payload:  { id: string; change: number }  } 
-  | { type: 'ResetAbsents' ; payload: { id: string , change: number } } ;
-
+  | { type: 'ResetAbsents' ; payload: { id: string , change: number } } 
+  | { type: 'REMIVE_FIRST' } 
+  | { type: 'ADD_STUDENT' ; payload: IStudent } 
 const reducer = (state: Istate, action: Action) => {
   switch (action.type) {
     case 'IncrementAbsents': {
@@ -53,6 +55,21 @@ const reducer = (state: Istate, action: Action) => {
             // state.students.reduce((total, student) => total + (student.absents ), 0),
           };
     }
+    case'REMIVE_FIRST': {
+      return {
+        ...state ,
+        students : state.students.slice(1)
+      }
+    }
+    case 'ADD_STUDENT': {
+      const newStudent = action.payload;
+      return {
+       ...state,
+        students: [...state.students, newStudent],
+      }
+    }
+
+
     default:
       return state;
   }
